@@ -1,0 +1,23 @@
+.profile__edit-popup {
+  padding: 11px;
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  align-self: center;
+  background: transparent url('../../../images/penciliconWhite.svg') center center no-repeat;
+  /* немного сдвигаем вниз, чтобы было похоже на макет */
+  position: relative;
+  top: 4px;
+  left: 0;
+}
+
+.profile__edit-popup:hover {
+  opacity: .6;
+}
+
+@media screen and (max-width: 450px) {
+  .profile__edit-popup {
+    background: transparent url('../../../images/penciliconWhite7575.svg') center center no-repeat;
+    padding: 8px;
+    top: 2px;
+  }
+}

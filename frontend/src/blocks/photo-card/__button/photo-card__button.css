@@ -1,0 +1,13 @@
+.photo-card__button {
+  padding: 0;
+  margin: 0 0 3px 0;
+  border: none;
+  background: transparent url('../../../images/loveLikeWhite.svg') no-repeat;
+  width: 22px;
+  height: 19px;
+  cursor: pointer;
+}
+
+.photo-card__button:hover {
+  opacity: .5;
+}

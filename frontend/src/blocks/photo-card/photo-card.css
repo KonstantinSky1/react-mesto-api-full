@@ -1,0 +1,10 @@
+.photo-card {
+  /* display: flex прижимает надпись к низу карточки в случае отсутствия картинки */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 282px;
+  background-color: #FFF;
+  border-radius: 10px;
+  overflow: hidden;
+}

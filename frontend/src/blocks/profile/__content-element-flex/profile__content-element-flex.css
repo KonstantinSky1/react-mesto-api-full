@@ -1,0 +1,10 @@
+.profile__content-element-flex {
+  display: flex;
+  margin: 0 0 10px 0;
+}
+
+@media screen and (max-width: 580px) {
+  .profile__content-element-flex {
+    padding-left: 32px;
+  }
+}

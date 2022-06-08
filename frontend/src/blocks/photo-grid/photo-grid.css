@@ -1,0 +1,10 @@
+.photo-grid {
+  padding: 47px 0 0 0;
+  color: #000;
+}
+
+@media screen and (max-width: 580px) {
+  .photo-grid {
+    padding: 36px 0 0 0;
+  }
+}

@@ -1,0 +1,12 @@
+.photo-card__button_like_black {
+  padding: 0;
+  border: none;
+  background: transparent url('../../../../images/loveLikeBlack.svg') no-repeat;
+  width: 22px;
+  height: 19px;
+  cursor: pointer;
+}
+
+.photo-card__button_like_black:hover {
+  opacity: .5;
+}
