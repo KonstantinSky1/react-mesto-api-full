@@ -36,14 +36,7 @@ const createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((user) => res.send({
-      data: {
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-      },
-    }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.code === 11000) {
         return next(new ConflictError('Данный емеил уже занят'));
@@ -58,7 +51,7 @@ const createUser = (req, res, next) => {
 
 const getUsers = (_, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch((err) => next(err));
 };
 
@@ -69,7 +62,7 @@ const getUser = (req, res, next) => {
         throw new NotFoundError('Запрашиваемый пользователь не найден');
       }
 
-      return res.send({ data: user });
+      return res.send(user);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -87,7 +80,7 @@ const getUserMe = (req, res, next) => {
         throw new NotFoundError('Запрашиваемый пользователь не найден');
       }
 
-      return res.send({ data: user });
+      return res.send(user);
     })
     .catch((err) => next(err));
 };
@@ -106,7 +99,7 @@ const updateUser = (req, res, next) => {
       runValidators: true,
     },
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Некорректные данные name или about'));
@@ -129,7 +122,7 @@ const updateAvatar = (req, res, next) => {
       runValidators: true,
     },
   )
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Некорректные данные avatar'));

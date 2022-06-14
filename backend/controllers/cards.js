@@ -6,7 +6,7 @@ const ForbiddenError = require('../errors/forbidden');
 const getCards = (_, res, next) => {
   Card.find({})
     .populate('owner')
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch((err) => next(err));
 };
 
@@ -14,7 +14,7 @@ const createCard = (req, res, next) => {
   const { name, link } = req.body;
 
   return Card.create({ name, link, owner: req.user._id })
-    .then((card) => res.send({ data: card }))
+    .then((card) => res.send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Некорректные данные name или link'));
@@ -33,7 +33,7 @@ const deleteCard = (req, res, next) => {
         case !card.owner.equals(req.user._id)
           : throw new ForbiddenError('Невозможно удалить чужую карточку');
         default
-          : return card.remove().then(() => res.send({ data: card }));
+          : return card.remove().then(() => res.send(card));
       }
     })
     .catch((err) => {
@@ -56,7 +56,7 @@ const likeCard = (req, res, next) => {
         throw new NotFoundError('В БД нет карточки с таким id');
       }
 
-      return res.send({ data: card });
+      return res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -78,7 +78,7 @@ const dislikeCard = (req, res, next) => {
         throw new NotFoundError('В БД нет карточки с таким id');
       }
 
-      return res.send({ data: card });
+      return res.send(card);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

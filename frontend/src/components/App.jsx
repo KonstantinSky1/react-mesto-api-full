@@ -53,16 +53,18 @@ function App() {
   }, [loggedIn]);
 
   useEffect(() => {
-    Promise.all([api.getProfile(), api.getInitialCards()])
-      .then(([userData, cardsData]) => {
-        setCurrentUser(userData);
-        setCards(cardsData);
-      })
-      .catch(err => console.log(err));
-  }, []);
+    if (loggedIn) {
+      Promise.all([api.getProfile(), api.getInitialCards()])
+        .then(([userData, cardsData]) => {
+          setCurrentUser(userData);
+          setCards(cardsData.reverse());
+        })
+        .catch(err => console.log(err));
+      }
+  }, [loggedIn]);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
 
     api.changeLikeCardStatus(card._id, isLiked)
       .then(newCard => setCards(state => state.map(c => c._id === card._id ? newCard : c)))
@@ -167,7 +169,7 @@ function App() {
         .then(res => {
           if (res) {
             setLoggedIn(true);
-            setEmail(res.data.email);
+            setEmail(res.email);
             history.push('/');
           }
         })
