@@ -83,7 +83,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://api.konstantinskutin.nomoredomains.xyz',
+  baseUrl: 'https://api.konstantinskutin.nomoredomains.xyz',
 });
 
 export default api;

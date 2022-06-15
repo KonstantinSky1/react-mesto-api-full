@@ -1,4 +1,4 @@
-const BASE_URL = 'http://api.konstantinskutin.nomoredomains.xyz';
+const BASE_URL = 'https://api.konstantinskutin.nomoredomains.xyz';
 
 function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(res);
