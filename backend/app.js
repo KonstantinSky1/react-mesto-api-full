@@ -7,6 +7,7 @@ const { errors, celebrate, Joi } = require('celebrate');
 
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const handleErrors = require('./middlewares/handleerr');
 const NotFoundError = require('./errors/not-found-err');
 const regEx = require('./constant/constant');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -47,18 +48,14 @@ app.use(auth);
 
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/cards'));
+
 app.use('*', (_, __, next) => next(new NotFoundError('Запрашиваемая страница не найдена')));
 
 app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, _, res, next) => {
-  const { statusCode = 500, message } = err;
-
-  res.status(statusCode).send({ message: statusCode === 500 ? 'На сервере произошла ошибка' : message });
-  next();
-});
+app.use(handleErrors);
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
